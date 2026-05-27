@@ -1,0 +1,1114 @@
+/* css/style.css - Premium Automotive Marketplace Platform */
+
+/* ============================================
+   CSS Variables & Reset
+   ============================================ */
+:root {
+    --black: #0D0D0D;
+    --gold: #F5B301;
+    --red: #D62828;
+    --white: #FFFFFF;
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-800: #1e1e1e;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.16);
+    --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.2);
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+    transition: background var(--transition-base), color var(--transition-base);
+    line-height: 1.5;
+}
+
+body.dark {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ============================================
+   Loading Overlay
+   ============================================ */
+#loading-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--black);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+.loader {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--gray-300);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   WhatsApp Float & Back to Top
+   ============================================ */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #25D366;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    z-index: 99;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition-fast);
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    background: var(--gold);
+    color: var(--black);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: none;
+    z-index: 99;
+    transition: transform var(--transition-fast);
+}
+
+.back-to-top:hover {
+    transform: scale(1.1);
+}
+
+/* ============================================
+   Navigation
+   ============================================ */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(13, 13, 13, 0.95);
+    backdrop-filter: blur(16px);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(245, 179, 1, 0.3);
+    transition: var(--transition-base);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--white);
+    letter-spacing: -0.5px;
+}
+
+@media (min-width: 768px) {
+    .logo {
+        font-size: 1.4rem;
+    }
+}
+
+.logo-gold {
+    color: var(--gold);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .nav-links {
+        gap: 2rem;
+    }
+}
+
+.nav-links a {
+    color: var(--white);
+    font-weight: 500;
+    transition: color var(--transition-fast);
+    font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+    .nav-links a {
+        font-size: 1rem;
+    }
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--gold);
+}
+
+.dark-toggle {
+    background: none;
+    border: none;
+    color: var(--gold);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.dark-toggle:hover {
+    transform: scale(1.1);
+}
+
+.hamburger {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--white);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        flex-direction: column;
+        background: rgba(13, 13, 13, 0.98);
+        backdrop-filter: blur(20px);
+        width: 100%;
+        text-align: center;
+        transition: left 0.3s ease;
+        padding: 2rem;
+        gap: 1.5rem;
+        border-bottom: 1px solid rgba(245, 179, 1, 0.3);
+    }
+    
+    .nav-links.active {
+        left: 0;
+    }
+}
+
+/* ============================================
+   Hero Section
+   ============================================ */
+.hero {
+    position: relative;
+    min-height: 90vh;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 2rem;
+}
+
+.hero-title {
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: 0 0 15px rgba(245, 179, 1, 0.5);
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .hero-title {
+        font-size: 3rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+}
+
+.hero-subtitle {
+    font-size: 1rem;
+    margin: 1rem 0;
+    line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.trust-badges {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    font-weight: 500;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+    .trust-badges {
+        gap: 2rem;
+    }
+}
+
+.trust-badges span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+}
+
+@media (min-width: 768px) {
+    .trust-badges span {
+        font-size: 1rem;
+    }
+}
+
+.floating-cards {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 0 1rem;
+    animation: float 3s infinite alternate;
+}
+
+@media (min-width: 768px) {
+    .floating-cards {
+        gap: 2rem;
+    }
+}
+
+.float-card {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    padding: 0.5rem 1rem;
+    border-radius: 40px;
+    border-left: 3px solid var(--gold);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@keyframes float {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-15px); }
+}
+
+/* ============================================
+   Stats Section
+   ============================================ */
+.stats-section {
+    display: flex;
+    justify-content: space-around;
+    padding: 3rem 1rem;
+    background: var(--black);
+    color: var(--white);
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+@media (min-width: 768px) {
+    .stat-number {
+        font-size: 2.5rem;
+    }
+}
+
+.stat-label {
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.btn {
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: all var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+    .btn {
+        font-size: 1rem;
+    }
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: var(--black);
+}
+
+.btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(245, 179, 1, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid var(--gold);
+    color: var(--gold);
+}
+
+.btn-secondary:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: scale(1.05);
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+}
+
+.btn-block {
+    width: 100%;
+    justify-content: center;
+}
+
+/* ============================================
+   Section Styles
+   ============================================ */
+.section {
+    padding: 3rem 1rem;
+}
+
+@media (min-width: 768px) {
+    .section {
+        padding: 5rem 2rem;
+    }
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .section-title {
+        font-size: 2.2rem;
+        margin-bottom: 3rem;
+    }
+}
+
+.highlight {
+    color: var(--gold);
+}
+
+.bg-dark {
+    background: var(--gray-100);
+}
+
+body.dark .bg-dark {
+    background: #0a0a0a;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* ============================================
+   Grid Layouts
+   ============================================ */
+.cars-grid,
+.services-grid,
+.features-grid,
+.community-grid,
+.dealers-grid,
+.all-services-grid,
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .cars-grid,
+    .services-grid,
+    .features-grid,
+    .community-grid,
+    .dealers-grid,
+    .all-services-grid,
+    .team-grid {
+        gap: 2rem;
+    }
+}
+
+/* ============================================
+   Cards
+   ============================================ */
+.card,
+.service-card,
+.feature-card,
+.testimonial-card,
+.dealer-card,
+.team-card,
+.partner-card,
+.value-card {
+    background: var(--white);
+    border-radius: 28px;
+    padding: 1.5rem;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+}
+
+body.dark .card,
+body.dark .service-card,
+body.dark .feature-card,
+body.dark .testimonial-card,
+body.dark .dealer-card,
+body.dark .team-card,
+body.dark .partner-card,
+body.dark .value-card {
+    background: rgba(30, 30, 40, 0.9);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(245, 179, 1, 0.2);
+}
+
+.card:hover,
+.service-card:hover,
+.feature-card:hover,
+.dealer-card:hover,
+.team-card:hover,
+.partner-card:hover,
+.value-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.car-img {
+    background: linear-gradient(135deg, #333, #555);
+    height: 180px;
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 1rem;
+}
+
+.car-details p {
+    margin: 0.4rem 0;
+    font-size: 0.9rem;
+}
+
+.price {
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin: 0.5rem 0;
+}
+
+.feature-card i,
+.service-card i,
+.testimonial-card i,
+.dealer-card .dealer-icon i,
+.team-card i,
+.partner-card i,
+.value-card i {
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+}
+
+.feature-card h3,
+.service-card h3,
+.dealer-card h3,
+.team-card h3,
+.partner-card h3,
+.value-card h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.feature-card p,
+.service-card p,
+.dealer-card p,
+.team-card p,
+.partner-card p,
+.value-card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #666;
+}
+
+body.dark .feature-card p,
+body.dark .service-card p,
+body.dark .dealer-card p,
+body.dark .team-card p,
+body.dark .partner-card p,
+body.dark .value-card p {
+    color: #aaa;
+}
+
+/* ============================================
+   Community Section
+   ============================================ */
+.community-section {
+    background: linear-gradient(145deg, #fef9e6, #fff3d1);
+}
+
+body.dark .community-section {
+    background: linear-gradient(145deg, #0a0a0a, #1a1a1a);
+}
+
+.testimonial-card p {
+    font-style: italic;
+    margin: 1rem 0;
+    line-height: 1.6;
+}
+
+.stars {
+    color: var(--gold);
+    margin: 0.5rem 0;
+}
+
+.dealer-spotlight {
+    text-align: center;
+}
+
+.dealer-spotlight i {
+    font-size: 2rem;
+    color: var(--gold);
+}
+
+.whatsapp-preview {
+    background: rgba(37, 211, 102, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-preview i {
+    font-size: 2rem;
+    color: #25D366;
+    margin-bottom: 0.5rem;
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #25D366;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 40px;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: var(--transition-base);
+}
+
+.btn-whatsapp:hover {
+    transform: scale(1.05);
+}
+
+/* ============================================
+   FAQ Accordion
+   ============================================ */
+.faq-accordion {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    background: rgba(0, 0, 0, 0.03);
+    margin: 1rem 0;
+    border-radius: 20px;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+body.dark .faq-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.faq-item:hover {
+    background: rgba(245, 179, 1, 0.05);
+}
+
+.faq-question {
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #666;
+}
+
+body.dark .faq-answer {
+    color: #aaa;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    margin-top: 1rem;
+}
+
+/* ============================================
+   Filters Section
+   ============================================ */
+.filters-section {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    min-width: 200px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.5rem;
+    border-radius: 40px;
+    border: 1px solid var(--gray-300);
+    font-size: 0.9rem;
+}
+
+body.dark .search-box input {
+    background: #2a2a2a;
+    border-color: #444;
+    color: white;
+}
+
+.filter-group {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.filter-group select {
+    padding: 0.8rem 1.2rem;
+    border-radius: 40px;
+    border: 1px solid var(--gray-300);
+    background: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+body.dark .filter-group select {
+    background: #2a2a2a;
+    border-color: #444;
+    color: white;
+}
+
+/* ============================================
+   Dealer Rating
+   ============================================ */
+.dealer-rating {
+    color: var(--gold);
+    margin: 0.5rem 0;
+    font-weight: 600;
+}
+
+/* ============================================
+   Financing Page
+   ============================================ */
+.financing-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 992px) {
+    .financing-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.calculator-card {
+    background: var(--white);
+    border-radius: 28px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+body.dark .calculator-card {
+    background: rgba(30, 30, 40, 0.9);
+}
+
+.calculator-card h3 {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 12px;
+    border: 1px solid var(--gray-300);
+    font-size: 1rem;
+}
+
+body.dark .form-group input,
+body.dark .form-group select,
+body.dark .form-group textarea {
+    background: #2a2a2a;
+    border-color: #444;
+    color: white;
+}
+
+.result-box {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(245, 179, 1, 0.1);
+    border-radius: 16px;
+    text-align: center;
+}
+
+.result-box h3 {
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.result-box .amount {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--gold);
+}
+
+.partners-section h3 {
+    margin-bottom: 1rem;
+}
+
+.partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.loan-form {
+    background: var(--white);
+    border-radius: 28px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    margin-top: 2rem;
+}
+
+body.dark .loan-form {
+    background: rgba(30, 30, 40, 0.9);
+}
+
+/* ============================================
+   Contact Page
+   ============================================ */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 992px) {
+    .contact-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.info-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+body.dark .info-card {
+    background: rgba(30, 30, 40, 0.9);
+}
+
+.info-card i {
+    font-size: 2rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.map-container {
+    grid-column: 1 / -1;
+}
+
+.form-card {
+    background: var(--white);
+    border-radius: 28px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+body.dark .form-card {
+    background: rgba(30, 30, 40, 0.9);
+}
+
+.form-card h3 {
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ============================================
+   About Page
+   ============================================ */
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .about-text p {
+        font-size: 1.1rem;
+    }
+}
+
+.about-values {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+    background: var(--black);
+    color: var(--white);
+    padding: 3rem 1rem;
+}
+
+.footer-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3,
+.footer-section h4 {
+    margin-bottom: 1rem;
+    color: var(--gold);
+}
+
+.footer-section p {
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.footer-section a {
+    color: var(--white);
+    display: block;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+    transition: color var(--transition-fast);
+}
+
+.footer-section a:hover {
+    color: var(--gold);
+    transform: translateX(5px);
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    display: inline-flex;
+    width: 36px;
+    height: 36px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all var(--transition-fast);
+}
+
+.social-icons a:hover {
+    background: var(--gold);
+    color: var(--black);
+    transform: translateY(-3px);
+}
+
+.copyright {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* ============================================
+   Toast Notification
+   ============================================ */
+.toast-notification {
+    position: fixed;
+    bottom: 100px;
+    left: 20px;
+    background: var(--gold);
+    color: var(--black);
+    padding: 0.8rem 1.5rem;
+    border-radius: 40px;
+    z-index: 9998;
+    font-weight: 600;
+    box-shadow: var(--shadow-md);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

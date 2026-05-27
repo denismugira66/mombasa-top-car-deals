@@ -1,0 +1,123 @@
+<!-- listings.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Listings - Mombasa's Top Car Deals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-gold">MOMBASA'S</span> TOP CAR DEALS
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="listings.html" class="active">Listings</a>
+                <a href="dealers.html">Dealers</a>
+                <a href="services.html">Services</a>
+                <a href="financing.html">Financing</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+                <button id="darkModeToggle" class="dark-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="section listings-page">
+            <div class="container">
+                <h2 class="section-title">Vehicle <span class="highlight">Listings</span></h2>
+                
+                <div class="filters-section">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search cars by name...">
+                    </div>
+                    <div class="filter-group">
+                        <select id="brandFilter">
+                            <option value="all">All Brands</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Mazda">Mazda</option>
+                            <option value="Subaru">Subaru</option>
+                            <option value="Nissan">Nissan</option>
+                            <option value="Mercedes">Mercedes</option>
+                            <option value="Honda">Honda</option>
+                            <option value="BMW">BMW</option>
+                        </select>
+                        <select id="transmissionFilter">
+                            <option value="all">All Transmission</option>
+                            <option value="Automatic">Automatic</option>
+                            <option value="Manual">Manual</option>
+                            <option value="CVT">CVT</option>
+                        </select>
+                        <select id="fuelFilter">
+                            <option value="all">All Fuel Type</option>
+                            <option value="Petrol">Petrol</option>
+                            <option value="Diesel">Diesel</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="cars-grid" id="allListingsGrid"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MOMBASA'S TOP CAR DEALS</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Mombasa CBD, Kenya</p>
+                <p><i class="fas fa-phone"></i> 0704 054119</p>
+                <p><i class="fas fa-envelope"></i> info@mombasatopcars.co.ke</p>
+                <p class="copyright">© 2025 Kenya's Premier Automotive Marketplace</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="listings.html">Car Listings</a>
+                <a href="dealers.html">Dealers</a>
+                <a href="services.html">Services</a>
+                <a href="financing.html">Financing</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+                <a href="#">Dealer Agreement</a>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/254704054119" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
