@@ -1,23 +1,25 @@
-// js/script.js - Complete Interactive Features
+// js/script.js - MN AUTO GROUP Complete Interactive Features
 
-// Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     initLoadingScreen();
     initMobileMenu();
     initBackToTop();
-    initDarkMode();
     initCounters();
-    initFeaturedCars();
+    initFeaturedVehicles();
     initServicesGrid();
-    initFaqAccordion();
-    initContactButtons();
-    initFinancingCalculator();
+    initServicesDetailed();
+    initAllVehiclesPage();
+    initTestimonialsPage();
+    initTeamGrid();
     initContactForm();
-    initListingsPage();
-    initAllServicesPage();
+    initFinancingCalculator();
+    initLoanApplicationForm();
+    initSmoothScroll();
 });
 
-
+// ============================================
+// Loading Screen
+// ============================================
 function initLoadingScreen() {
     setTimeout(() => {
         const overlay = document.getElementById('loading-overlay');
@@ -30,6 +32,9 @@ function initLoadingScreen() {
     }, 800);
 }
 
+// ============================================
+// Mobile Menu
+// ============================================
 function initMobileMenu() {
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.getElementById('navLinks');
@@ -48,7 +53,9 @@ function initMobileMenu() {
     }
 }
 
-
+// ============================================
+// Back to Top Button
+// ============================================
 function initBackToTop() {
     const backBtn = document.getElementById('back-to-top');
     
@@ -67,32 +74,9 @@ function initBackToTop() {
     }
 }
 
-
-function initDarkMode() {
-    const darkToggle = document.getElementById('darkModeToggle');
-    
-    if (darkToggle) {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark');
-            darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        }
-        
-        darkToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            
-            if (document.body.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
-                darkToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            } else {
-                localStorage.setItem('theme', 'light');
-                darkToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            }
-        });
-    }
-}
-
-
+// ============================================
+// Animated Counters
+// ============================================
 function initCounters() {
     const counters = document.querySelectorAll('.stat-number');
     let countersStarted = false;
@@ -102,17 +86,27 @@ function initCounters() {
         countersStarted = true;
         
         counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
+            const targetText = counter.innerText;
+            const target = parseInt(targetText.replace(/[^0-9]/g, ''));
+            if (isNaN(target)) return;
+            
             let count = 0;
             const increment = target / 50;
             
             const updateCounter = () => {
                 count += increment;
                 if (count < target) {
-                    counter.innerText = Math.floor(count);
+                    let displayValue = Math.floor(count);
+                    if (targetText.includes('+')) {
+                        counter.innerText = displayValue + '+';
+                    } else if (targetText.includes('%')) {
+                        counter.innerText = displayValue + '%';
+                    } else {
+                        counter.innerText = displayValue;
+                    }
                     requestAnimationFrame(updateCounter);
                 } else {
-                    counter.innerText = target;
+                    counter.innerText = targetText;
                 }
             };
             updateCounter();
@@ -128,120 +122,63 @@ function initCounters() {
         });
     }, { threshold: 0.5 });
     
-    const statsSection = document.querySelector('.stats-section');
+    const statsSection = document.querySelector('.hero-stats, .stats-showcase');
     if (statsSection) observer.observe(statsSection);
 }
 
 // ============================================
-// Featured Cars Data
+// Featured Vehicles
 // ============================================
-function initFeaturedCars() {
-    const carsGrid = document.getElementById('featuredCarsGrid');
+function initFeaturedVehicles() {
+    const vehiclesGrid = document.getElementById('featuredVehiclesGrid');
     
-    if (carsGrid) {
-        const cars = [
-            {
-                name: 'Toyota Prado',
-                year: 2022,
-                transmission: 'Automatic',
-                mileage: '45,000 km',
-                fuel: 'Diesel',
-                price: 'KES 7,200,000',
-                location: 'Mombasa CBD',
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Toyota+Prado'
-            },
-            {
-                name: 'Mazda CX5',
-                year: 2021,
-                transmission: 'Automatic',
-                mileage: '30,000 km',
-                fuel: 'Petrol',
-                price: 'KES 4,500,000',
-                location: 'Nyali',
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Mazda+CX5'
-            },
-            {
-                name: 'Subaru Forester',
-                year: 2023,
-                transmission: 'CVT',
-                mileage: '15,000 km',
-                fuel: 'Petrol',
-                price: 'KES 5,200,000',
-                location: 'Mombasa West',
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Subaru+Forester'
-            },
-            {
-                name: 'Nissan Xtrail',
-                year: 2020,
-                transmission: 'Automatic',
-                mileage: '60,000 km',
-                fuel: 'Petrol',
-                price: 'KES 3,900,000',
-                location: 'Likoni',
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Nissan+Xtrail'
-            },
-            {
-                name: 'Mercedes C200',
-                year: 2022,
-                transmission: 'Automatic',
-                mileage: '22,000 km',
-                fuel: 'Petrol',
-                price: 'KES 9,100,000',
-                location: 'Mombasa CBD',
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Mercedes+C200'
-            },
-            {
-                name: 'Toyota Hilux',
-                year: 2023,
-                transmission: 'Manual',
-                mileage: '12,000 km',
-                fuel: 'Diesel',
-                price: 'KES 6,800,000',
-                location: 'Mombasa',
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Toyota+Hilux'
-            }
+    if (vehiclesGrid) {
+        const vehicles = [
+            { name: 'Toyota Land Cruiser Prado', year: 2023, transmission: 'Automatic', mileage: '15,000 km', fuel: 'Diesel', price: 'KES 8,500,000', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=Land+Cruiser+Prado' },
+            { name: 'Mercedes-Benz E-Class', year: 2022, transmission: 'Automatic', mileage: '22,000 km', fuel: 'Petrol', price: 'KES 9,200,000', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=Mercedes+E-Class' },
+            { name: 'BMW X5', year: 2023, transmission: 'Automatic', mileage: '10,000 km', fuel: 'Diesel', price: 'KES 11,500,000', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=BMW+X5' },
+            { name: 'Range Rover Sport', year: 2022, transmission: 'Automatic', mileage: '18,000 km', fuel: 'Diesel', price: 'KES 14,800,000', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=Range+Rover' }
         ];
         
-        carsGrid.innerHTML = cars.map(car => `
-            <div class="card">
-                <div class="car-img" style="background-image: url('${car.image}');"></div>
-                <div class="car-details">
-                    <h3>${car.name}</h3>
-                    <p><i class="fas fa-calendar-alt"></i> ${car.year} | <i class="fas fa-cog"></i> ${car.transmission} | <i class="fas fa-road"></i> ${car.mileage}</p>
-                    <p><i class="fas fa-gas-pump"></i> ${car.fuel}</p>
-                    <p class="price">${car.price}</p>
-                    <p><i class="fas fa-map-marker-alt"></i> ${car.location}</p>
-                    <button class="btn btn-details view-car" data-car="${car.name}">View Details</button>
+        vehiclesGrid.innerHTML = vehicles.map(vehicle => `
+            <div class="vehicle-card">
+                <div class="vehicle-image" style="background-image: url('${vehicle.image}'); background-size: cover; background-position: center;"></div>
+                <div class="vehicle-details">
+                    <h3 class="vehicle-title">${vehicle.name}</h3>
+                    <div class="vehicle-specs">
+                        <span><i class="fas fa-calendar-alt"></i> ${vehicle.year}</span>
+                        <span><i class="fas fa-cog"></i> ${vehicle.transmission}</span>
+                        <span><i class="fas fa-road"></i> ${vehicle.mileage}</span>
+                        <span><i class="fas fa-gas-pump"></i> ${vehicle.fuel}</span>
+                    </div>
+                    <div class="vehicle-price">${vehicle.price}</div>
+                    <div class="vehicle-location"><i class="fas fa-map-marker-alt"></i> ${vehicle.location}</div>
+                    <button class="btn btn-primary btn-small inquire-btn" data-vehicle="${vehicle.name}">Inquire Now</button>
                 </div>
             </div>
         `).join('');
         
-        // Add event listeners to view car buttons
-        document.querySelectorAll('.view-car').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const carName = btn.getAttribute('data-car');
-                showToast(`Contact us about ${carName}: Call 0704 054119`);
+        document.querySelectorAll('.inquire-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                showToast(`Inquiry sent for ${btn.getAttribute('data-vehicle')}. We'll contact you shortly.`);
             });
         });
     }
 }
 
 // ============================================
-// Services Grid for Home Page
+// Services Grid (Homepage)
 // ============================================
 function initServicesGrid() {
     const servicesGrid = document.getElementById('servicesGrid');
     
     if (servicesGrid) {
         const services = [
-            { name: 'Car Financing', icon: 'hand-holding-usd', desc: 'Competitive auto loans with flexible terms' },
-            { name: 'Vehicle Importation', icon: 'ship', desc: 'Full import services from Japan, UAE, UK' },
-            { name: 'Insurance', icon: 'shield-alt', desc: 'Comprehensive coverage options' },
-            { name: 'Car Detailing', icon: 'spray-can', desc: 'Premium interior and exterior detailing' },
-            { name: 'Mechanical Services', icon: 'wrench', desc: 'Certified mechanics for all makes' },
-            { name: 'Spare Parts', icon: 'oil-can', desc: 'Genuine and quality aftermarket parts' },
-            { name: 'Vehicle Inspection', icon: 'search', desc: 'Pre-purchase inspection reports' },
-            { name: 'Car Tracking', icon: 'satellite-dish', desc: 'GPS tracking installation' }
+            { name: 'Vehicle Sales', icon: 'car', desc: 'Premium new and used vehicles from top brands' },
+            { name: 'Vehicle Imports', icon: 'ship', desc: 'Professional import services from global markets' },
+            { name: 'Financing Assistance', icon: 'hand-holding-usd', desc: 'Flexible financing options with competitive rates' },
+            { name: 'Trade-In Services', icon: 'exchange-alt', desc: 'Fair value trade-in for your current vehicle' },
+            { name: 'Vehicle Sourcing', icon: 'search', desc: 'Find any vehicle from anywhere in the world' }
         ];
         
         servicesGrid.innerHTML = services.map(service => `
@@ -255,37 +192,31 @@ function initServicesGrid() {
 }
 
 // ============================================
-// All Services Page
+// Services Detailed Page
 // ============================================
-function initAllServicesPage() {
-    const allServicesGrid = document.getElementById('allServicesGrid');
+function initServicesDetailed() {
+    const servicesDetailedGrid = document.getElementById('servicesDetailedGrid');
     
-    if (allServicesGrid) {
-        const allServices = [
-            { name: 'Professional Mechanics', icon: 'wrench', desc: 'Certified mechanics for all vehicle makes and models. On-site and mobile services available.' },
-            { name: 'Car Detailing', icon: 'spray-can', desc: 'Premium interior and exterior detailing services. Ceramic coating and paint protection.' },
-            { name: 'Towing Services', icon: 'truck', desc: '24/7 emergency towing across Mombasa and surrounding areas. Fast response time.' },
-            { name: 'Transport Logistics', icon: 'shipping-fast', desc: 'Vehicle transport and logistics solutions across Kenya.' },
-            { name: 'Insurance Services', icon: 'shield-alt', desc: 'Comprehensive vehicle insurance coverage from leading providers.' },
-            { name: 'Importation', icon: 'ship', desc: 'Full vehicle importation from Japan, UAE, UK with customs clearance.' },
-            { name: 'Spare Parts', icon: 'oil-can', desc: 'Genuine and quality aftermarket spare parts for all brands.' },
-            { name: 'Diagnostics', icon: 'microchip', desc: 'Advanced computer diagnostics and repair services.' },
-            { name: 'Paint & Body', icon: 'paint-brush', desc: 'Professional paint jobs and body repair services.' },
-            { name: 'AC Repair', icon: 'snowflake', desc: 'Air conditioning repair and maintenance.' },
-            { name: 'Battery Services', icon: 'car-battery', desc: 'Battery testing, replacement, and jump-start services.' },
-            { name: 'Tire Services', icon: 'circle', desc: 'Tire sales, rotation, balancing, and alignment.' }
+    if (servicesDetailedGrid) {
+        const services = [
+            { name: 'Vehicle Sales', icon: 'car', desc: 'Browse our extensive collection of premium vehicles. From luxury sedans to powerful SUVs, we have the perfect car for every lifestyle.', longDesc: 'Our showroom features the finest selection of new and pre-owned vehicles from the world\'s most prestigious manufacturers. Each vehicle undergoes rigorous inspection to ensure quality and reliability.' },
+            { name: 'Vehicle Imports', icon: 'ship', desc: 'Import any vehicle from Japan, UAE, Europe, or USA with our comprehensive import service. We handle everything from sourcing to customs clearance.', longDesc: 'Leverage our global network to import your dream vehicle with full documentation and warranty support. We handle shipping, customs clearance, and registration.' },
+            { name: 'Financing Assistance', icon: 'hand-holding-usd', desc: 'Get pre-approved for auto financing with competitive interest rates and flexible repayment terms tailored to your budget.', longDesc: 'We partner with leading financial institutions to offer you the best financing solutions in the market. Get quick approval and drive your dream car sooner.' },
+            { name: 'Trade-In Services', icon: 'exchange-alt', desc: 'Upgrade to your dream car with our fair and transparent trade-in program. Get an instant valuation for your current vehicle.', longDesc: 'Our trade-in process is quick, transparent, and designed to give you the best value for your current car. Simply bring your vehicle for inspection and get an offer.' },
+            { name: 'Vehicle Sourcing', icon: 'search', desc: 'Can\'t find the specific vehicle you want? Let our expert sourcing team find it for you anywhere in the world.', longDesc: 'Our global network allows us to source any vehicle, any specification, from any market. Tell us what you want, and we\'ll find it for you.' }
         ];
         
-        allServicesGrid.innerHTML = allServices.map(service => `
+        servicesDetailedGrid.innerHTML = services.map(service => `
             <div class="service-card">
                 <i class="fas fa-${service.icon}"></i>
                 <h3>${service.name}</h3>
                 <p>${service.desc}</p>
-                <button class="btn btn-small btn-primary service-inquiry" data-service="${service.name}">Inquire Now</button>
+                <p style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-light);">${service.longDesc}</p>
+                <button class="btn btn-primary btn-small service-inquire" data-service="${service.name}" style="margin-top: 1rem;">Inquire About ${service.name}</button>
             </div>
         `).join('');
         
-        document.querySelectorAll('.service-inquiry').forEach(btn => {
+        document.querySelectorAll('.service-inquire').forEach(btn => {
             btn.addEventListener('click', () => {
                 showToast(`Inquiry sent for ${btn.getAttribute('data-service')}. We'll contact you shortly.`);
             });
@@ -293,76 +224,149 @@ function initAllServicesPage() {
     }
 }
 
-
-function initFaqAccordion() {
-    const faqItems = document.querySelectorAll('.faq-item');
+// ============================================
+// All Vehicles Page with Filtering
+// ============================================
+function initAllVehiclesPage() {
+    const vehiclesGrid = document.getElementById('allVehiclesGrid');
     
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            item.classList.toggle('active');
-        });
-    });
-}
-
-function initContactButtons() {
-    document.querySelectorAll('.contact-dealer, .view-dealer').forEach(btn => {
-        btn.addEventListener('click', () => {
-            showToast('Dealer contact info will be shared. Call 0704 054119 for immediate assistance.');
-        });
-    });
-    
-    const whatsappBtn = document.querySelector('.btn-whatsapp');
-    if (whatsappBtn) {
-        whatsappBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.open('https://chat.whatsapp.com/', '_blank');
-        });
+    if (vehiclesGrid) {
+        const allVehicles = [
+            { name: 'Toyota Land Cruiser Prado', year: 2023, price: 8500000, priceFormatted: 'KES 8,500,000', brand: 'Toyota', transmission: 'Automatic', fuel: 'Diesel', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=Land+Cruiser+Prado' },
+            { name: 'Mercedes-Benz E-Class', year: 2022, price: 9200000, priceFormatted: 'KES 9,200,000', brand: 'Mercedes', transmission: 'Automatic', fuel: 'Petrol', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=Mercedes+E-Class' },
+            { name: 'BMW X5', year: 2023, price: 11500000, priceFormatted: 'KES 11,500,000', brand: 'BMW', transmission: 'Automatic', fuel: 'Diesel', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=BMW+X5' },
+            { name: 'Range Rover Sport', year: 2022, price: 14800000, priceFormatted: 'KES 14,800,000', brand: 'Land Rover', transmission: 'Automatic', fuel: 'Diesel', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=Range+Rover' },
+            { name: 'Audi Q7', year: 2023, price: 12500000, priceFormatted: 'KES 12,500,000', brand: 'Audi', transmission: 'Automatic', fuel: 'Petrol', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=Audi+Q7' },
+            { name: 'Lexus LX570', year: 2022, price: 16200000, priceFormatted: 'KES 16,200,000', brand: 'Lexus', transmission: 'Automatic', fuel: 'Petrol', location: 'Mombasa', image: 'https://placehold.co/600x400/0B1F4D/D4AF37?text=Lexus+LX570' }
+        ];
+        
+        function renderVehicles(vehicles) {
+            if (vehicles.length === 0) {
+                vehiclesGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 3rem;">No vehicles found matching your criteria</div>';
+                return;
+            }
+            
+            vehiclesGrid.innerHTML = vehicles.map(vehicle => `
+                <div class="vehicle-card">
+                    <div class="vehicle-image" style="background-image: url('${vehicle.image}'); background-size: cover; background-position: center;"></div>
+                    <div class="vehicle-details">
+                        <h3 class="vehicle-title">${vehicle.name}</h3>
+                        <div class="vehicle-specs">
+                            <span><i class="fas fa-calendar-alt"></i> ${vehicle.year}</span>
+                            <span><i class="fas fa-cog"></i> ${vehicle.transmission}</span>
+                            <span><i class="fas fa-gas-pump"></i> ${vehicle.fuel}</span>
+                        </div>
+                        <div class="vehicle-price">${vehicle.priceFormatted}</div>
+                        <div class="vehicle-location"><i class="fas fa-map-marker-alt"></i> ${vehicle.location}</div>
+                        <button class="btn btn-primary btn-small vehicle-inquire" data-vehicle="${vehicle.name}">Inquire Now</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            document.querySelectorAll('.vehicle-inquire').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    showToast(`Inquiry sent for ${btn.getAttribute('data-vehicle')}. We'll contact you shortly.`);
+                });
+            });
+        }
+        
+        renderVehicles(allVehicles);
+        
+        const searchInput = document.getElementById('searchInput');
+        const brandFilter = document.getElementById('brandFilter');
+        const priceFilter = document.getElementById('priceFilter');
+        const fuelFilter = document.getElementById('fuelFilter');
+        
+        function filterVehicles() {
+            let filtered = [...allVehicles];
+            const searchTerm = searchInput?.value.toLowerCase() || '';
+            const brand = brandFilter?.value || 'all';
+            const price = priceFilter?.value || 'all';
+            const fuel = fuelFilter?.value || 'all';
+            
+            if (searchTerm) {
+                filtered = filtered.filter(v => v.name.toLowerCase().includes(searchTerm));
+            }
+            if (brand !== 'all') {
+                filtered = filtered.filter(v => v.brand === brand);
+            }
+            if (fuel !== 'all') {
+                filtered = filtered.filter(v => v.fuel === fuel);
+            }
+            if (price !== 'all') {
+                if (price === 'under5') filtered = filtered.filter(v => v.price < 5000000);
+                else if (price === '5-10') filtered = filtered.filter(v => v.price >= 5000000 && v.price <= 10000000);
+                else if (price === 'over10') filtered = filtered.filter(v => v.price > 10000000);
+            }
+            renderVehicles(filtered);
+        }
+        
+        if (searchInput) searchInput.addEventListener('input', filterVehicles);
+        if (brandFilter) brandFilter.addEventListener('change', filterVehicles);
+        if (priceFilter) priceFilter.addEventListener('change', filterVehicles);
+        if (fuelFilter) fuelFilter.addEventListener('change', filterVehicles);
     }
 }
 
-function initFinancingCalculator() {
-    const calculateBtn = document.getElementById('calculateBtn');
+// ============================================
+// Testimonials Page
+// ============================================
+function initTestimonialsPage() {
+    const testimonialsGrid = document.getElementById('allTestimonialsGrid');
     
-    if (calculateBtn) {
-        calculateBtn.addEventListener('click', () => {
-            const price = parseFloat(document.getElementById('carPrice')?.value);
-            const down = parseFloat(document.getElementById('downPayment')?.value) || 0;
-            const rate = parseFloat(document.getElementById('interestRate')?.value) / 100 / 12;
-            const months = parseInt(document.getElementById('loanTerm')?.value);
-            const resultDiv = document.getElementById('result');
-            
-            if (isNaN(price) || price <= 0) {
-                resultDiv.innerHTML = '<p style="color: var(--red);">Please enter a valid car price</p>';
-                return;
-            }
-            
-            if (down >= price) {
-                resultDiv.innerHTML = '<p style="color: var(--red);">Down payment cannot exceed car price</p>';
-                return;
-            }
-            
-            const principal = price - down;
-            const emi = principal * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
-            
-            if (isNaN(emi) || !isFinite(emi)) {
-                resultDiv.innerHTML = '<p style="color: var(--red);">Please check your inputs</p>';
-                return;
-            }
-            
-            resultDiv.innerHTML = `
-                <h3>Monthly Installment</h3>
-                <div class="amount">KES ${emi.toFixed(0)}</div>
-                <p>for ${months} months at ${(rate * 1200).toFixed(1)}% APR</p>
-                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Total payable: KES ${(emi * months).toFixed(0)}</p>
-            `;
-        });
+    if (testimonialsGrid) {
+        const testimonials = [
+            { name: 'John Mwangi', title: 'Business Executive', text: 'The team at MN AUTO GROUP made my first luxury car purchase seamless. Their professionalism and attention to detail are unmatched. From the initial consultation to the final delivery, everything was handled perfectly.', rating: 5 },
+            { name: 'Sarah Hassan', title: 'Entrepreneur', text: 'I imported my Mercedes through MN AUTO GROUP. The process was smooth, transparent, and hassle-free. They handled all the paperwork and customs clearance. Highly recommended!', rating: 5 },
+            { name: 'Michael Otieno', title: 'Finance Director', text: 'Their financing assistance helped me secure my dream car. Professional, efficient, and trustworthy service throughout. The interest rates were competitive and the approval process was quick.', rating: 5 },
+            { name: 'Aisha Abdi', title: 'Medical Professional', text: 'Best car buying experience I have ever had. The team was knowledgeable, patient, and helped me find exactly what I was looking for within my budget.', rating: 5 },
+            { name: 'David Kimani', title: 'CEO', text: 'MN AUTO GROUP is the definition of excellence. From vehicle selection to after-sales support, they exceed expectations at every turn.', rating: 5 },
+            { name: 'Grace Wanjiku', title: 'Lawyer', text: 'I have bought three cars from MN AUTO GROUP over the years. Their consistency in quality and service keeps me coming back. Trustworthy and reliable.', rating: 5 }
+        ];
+        
+        testimonialsGrid.innerHTML = testimonials.map(testimonial => `
+            <div class="testimonial-card">
+                <i class="fas fa-quote-left"></i>
+                <p>"${testimonial.text}"</p>
+                <div class="testimonial-author">
+                    <div class="author-name">${testimonial.name}</div>
+                    <div class="author-title">${testimonial.title}</div>
+                    <div class="stars">${'<i class="fas fa-star"></i>'.repeat(testimonial.rating)}</div>
+                </div>
+            </div>
+        `).join('');
     }
 }
 
+// ============================================
+// Team Grid
+// ============================================
+function initTeamGrid() {
+    const teamGrid = document.getElementById('teamGrid');
+    
+    if (teamGrid) {
+        const team = [
+            { name: 'John Mwangi', role: 'CEO & Founder', icon: 'user-tie' },
+            { name: 'Sarah Hassan', role: 'Operations Director', icon: 'user' },
+            { name: 'Michael Otieno', role: 'Sales Manager', icon: 'chart-line' },
+            { name: 'Aisha Abdi', role: 'Customer Relations', icon: 'headset' }
+        ];
+        
+        teamGrid.innerHTML = team.map(member => `
+            <div class="team-card">
+                <i class="fas fa-${member.icon}"></i>
+                <h3>${member.name}</h3>
+                <p>${member.role}</p>
+            </div>
+        `).join('');
+    }
+}
+
+// ============================================
+// Contact Form Handler
+// ============================================
 function initContactForm() {
     const contactForm = document.getElementById('contactForm');
-    const loanForm = document.getElementById('loanApplicationForm');
     
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -371,195 +375,95 @@ function initContactForm() {
             contactForm.reset();
         });
     }
+}
+
+// ============================================
+// Financing Calculator
+// ============================================
+function initFinancingCalculator() {
+    const calculateBtn = document.getElementById('calculateBtn');
+    
+    if (calculateBtn) {
+        calculateBtn.addEventListener('click', () => {
+            const price = parseFloat(document.getElementById('vehiclePrice')?.value);
+            const down = parseFloat(document.getElementById('downPayment')?.value) || 0;
+            const rate = parseFloat(document.getElementById('interestRate')?.value) / 100 / 12;
+            const months = parseInt(document.getElementById('loanTerm')?.value);
+            const resultDiv = document.getElementById('result');
+            
+            if (isNaN(price) || price <= 0) {
+                resultDiv.innerHTML = '<p style="color: #D62828;">Please enter a valid vehicle price</p>';
+                return;
+            }
+            
+            if (down >= price) {
+                resultDiv.innerHTML = '<p style="color: #D62828;">Down payment cannot exceed vehicle price</p>';
+                return;
+            }
+            
+            const principal = price - down;
+            const emi = principal * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
+            
+            if (isNaN(emi) || !isFinite(emi)) {
+                resultDiv.innerHTML = '<p style="color: #D62828;">Please check your inputs</p>';
+                return;
+            }
+            
+            const formattedEmi = emi.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            const formattedTotal = (emi * months).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            
+            resultDiv.innerHTML = `
+                <h3>Monthly Installment</h3>
+                <div class="amount">KES ${formattedEmi}</div>
+                <p>for ${months} months at ${(rate * 1200).toFixed(1)}% APR</p>
+                <p style="margin-top: 0.5rem; font-size: 0.8rem;">Total payable: KES ${formattedTotal}</p>
+            `;
+        });
+    }
+}
+
+// ============================================
+// Loan Application Form
+// ============================================
+function initLoanApplicationForm() {
+    const loanForm = document.getElementById('loanApplicationForm');
     
     if (loanForm) {
         loanForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            showToast('Your loan application has been submitted.We will contact you soon.');
+            showToast('Your loan application has been submitted. A representative will contact you within 24 hours.');
             loanForm.reset();
         });
     }
 }
 
 
-function initListingsPage() {
-    const listingsGrid = document.getElementById('allListingsGrid');
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && href !== '' && href !== '/') {
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
     
-    if (listingsGrid) {
-        const allListings = [
-            { 
-                name: 'Toyota Prado TX', 
-                year: 2022, 
-                price: 'KES 7,200,000', 
-                brand: 'Toyota', 
-                transmission: 'Automatic', 
-                fuel: 'Diesel', 
-                body: 'SUV', 
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Toyota+Prado' 
-            },
-
-            { 
-                name: 'Mazda CX5', 
-                year: 2021, 
-                price: 'KES 4,500,000', 
-                brand: 'Mazda', 
-                transmission: 'Automatic', 
-                fuel: 'Petrol', 
-                body: 'SUV', 
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Mazda+CX5' 
-            },
-
-            { 
-                name: 'Subaru Forester', 
-                year: 2023, 
-                price: 'KES 5,200,000', 
-                brand: 'Subaru', 
-                transmission: 'CVT', 
-                fuel: 'Petrol', 
-                body: 'SUV', 
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Subaru+Forester' 
-            },
-
-            { 
-                name: 'Nissan Xtrail', 
-                year: 2020, 
-                price: 'KES 3,900,000', 
-                brand: 'Nissan', 
-                transmission: 'Automatic', 
-                fuel: 'Petrol', 
-                body: 'SUV', 
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Nissan+Xtrail' 
-            },
-
-            {
-                name: 'Mercedes C200', 
-                year: 2022,
-                price: 'KES 9,100,000', 
-                brand: 'Mercedes', 
-                transmission: 'Automatic', 
-                fuel: 'Petrol', 
-                body: 'Sedan', 
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Mercedes+C200' 
-            },
-
-            { 
-                name: 'Toyota Hilux', 
-                year: 2023, 
-                price: 'KES 6,800,000', 
-                brand: 'Toyota', 
-                transmission: 'Manual', 
-                fuel: 'Diesel', 
-                body: 'Pickup', 
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Toyota+Hilux' 
-            },
-
-            { 
-                name: 'Honda CRV', 
-                year: 2021, 
-                price: 'KES 4,200,000', 
-                brand: 'Honda', 
-                transmission: 'Automatic', 
-                fuel: 'Petrol', 
-                body: 'SUV', 
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Honda+CRV' 
-            },
-
-            { 
-                name: 'BMW X5', 
-                year: 2022, 
-                price: 'KES 12,500,000', 
-                brand: 'BMW', 
-                transmission: 'Automatic', 
-                fuel: 'Diesel', 
-                body: 'SUV', 
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=BMW+X5' 
-            },
-
-            { 
-                name: 'Range Rover Sport', 
-                year: 2023, 
-                price: 'KES 15,000,000', 
-                brand: 'Land Rover', 
-                transmission: 'Automatic', 
-                fuel: 'Diesel', 
-                body: 'SUV', 
-                image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=Range+Rover' 
-            },
-
-            {
-                 name: 'Volkswagen Golf', 
-                 year: 2021, 
-                 price: 'KES 3,500,000', 
-                 brand: 'Volkswagen', 
-                 transmission: 'Automatic', 
-                 fuel: 'Petrol', 
-                 body: 'Hatchback', 
-                 image: 'https://placehold.co/400x240/0D0D0D/F5B301?text=VW+Golf' 
-                },
-        ];
-        
-        function renderListings(listings) {
-            listingsGrid.innerHTML = listings.map(car => `
-                <div class="card">
-                    <div class="car-img" style="background-image: url('${car.image}');"></div>
-                    <div class="car-details">
-                        <h3>${car.name}</h3>
-                        <p>${car.year} | ${car.transmission}</p>
-                        <p><i class="fas fa-gas-pump"></i> ${car.fuel}</p>
-                        <p class="price">${car.price}</p>
-                        <button class="btn btn-details listing-view" data-car="${car.name}">View Details</button>
-                    </div>
-                </div>
-            `).join('');
-            
-            document.querySelectorAll('.listing-view').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    showToast(`Contact us about ${btn.getAttribute('data-car')}: Call 0704 054119`);
-                });
-            });
-        }
-        
-        renderListings(allListings);
-        
-        const searchInput = document.getElementById('searchInput');
-        const brandFilter = document.getElementById('brandFilter');
-        const transmissionFilter = document.getElementById('transmissionFilter');
-        const fuelFilter = document.getElementById('fuelFilter');
-        
-        function filterListings() {
-            let filtered = [...allListings];
-            const searchTerm = searchInput?.value.toLowerCase() || '';
-            const brand = brandFilter?.value || 'all';
-            const transmission = transmissionFilter?.value || 'all';
-            const fuel = fuelFilter?.value || 'all';
-            
-            if (searchTerm) {
-                filtered = filtered.filter(car => car.name.toLowerCase().includes(searchTerm));
-            }
-            if (brand !== 'all') {
-                filtered = filtered.filter(car => car.brand === brand);
-            }
-            if (transmission !== 'all') {
-                filtered = filtered.filter(car => car.transmission === transmission);
-            }
-            if (fuel !== 'all') {
-                filtered = filtered.filter(car => car.fuel === fuel);
-            }
-            renderListings(filtered);
-        }
-        
-        if (searchInput) searchInput.addEventListener('input', filterListings);
-        if (brandFilter) brandFilter.addEventListener('change', filterListings);
-        if (transmissionFilter) transmissionFilter.addEventListener('change', filterListings);
-        if (fuelFilter) fuelFilter.addEventListener('change', filterListings);
+    const scrollDown = document.querySelector('.hero-scroll');
+    if (scrollDown) {
+        scrollDown.addEventListener('click', () => {
+            window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+        });
     }
 }
-
 
 function showToast(message) {
     const toast = document.createElement('div');
     toast.className = 'toast-notification';
-    toast.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+    toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
     document.body.appendChild(toast);
     
     setTimeout(() => {
@@ -567,17 +471,3 @@ function showToast(message) {
         setTimeout(() => toast.remove(), 300);
     }, 3000);
 }
-
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && href !== '') {
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-    });
-});
