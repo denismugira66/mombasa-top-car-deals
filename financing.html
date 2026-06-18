@@ -1,31 +1,51 @@
-<!-- financing.html -->
+<!-- financing.html - MN AUTO GROUP Financing Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Financing - Mombasa's Top Car Deals</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Apply for auto financing with MN AUTO GROUP. Get competitive rates, flexible terms, and quick approval for your dream vehicle.">
+    <meta name="keywords" content="auto financing Kenya, car loan calculator, vehicle financing, MN financing, car loan Kenya">
+    <meta name="author" content="MN AUTO GROUP">
+    <meta property="og:title" content="Financing | MN AUTO GROUP | Auto Financing Solutions">
+    <meta property="og:description" content="Get pre-approved for auto financing with competitive rates">
+    <title>Financing | MN AUTO GROUP | Auto Financing Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 <body>
+
+    <div id="loading-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <a href="https://wa.me/254704054119" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <span class="logo-gold">MOMBASA'S</span> TOP CAR DEALS
+                <div class="logo-icon">MN</div>
+                <div class="logo-text">
+                    <span class="logo-gold">AUTO</span> GROUP
+                </div>
             </div>
             <div class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
-                <a href="listings.html">Listings</a>
-                <a href="dealers.html">Dealers</a>
+                <a href="vehicles.html">Vehicles</a>
                 <a href="services.html">Services</a>
                 <a href="financing.html" class="active">Financing</a>
+                <a href="testimonials.html">Testimonials</a>
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <button id="darkModeToggle" class="dark-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+                <a href="contact.html" class="nav-cta">Get Quote</a>
             </div>
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
@@ -34,28 +54,34 @@
     </nav>
 
     <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Auto <span class="gold-text">Financing</span></h1>
+                <p>Drive your dream car with flexible financing options</p>
+            </div>
+        </section>
+
         <section class="section financing-page">
             <div class="container">
-                <h2 class="section-title">Vehicle <span class="highlight">Financing Calculator</span></h2>
-                
                 <div class="financing-layout">
+                    <!-- Loan Calculator Card -->
                     <div class="calculator-card">
-                        <h3><i class="fas fa-calculator"></i> Calculate Your Installment</h3>
+                        <h3><i class="fas fa-calculator"></i> Calculate Your Monthly Installment</h3>
                         <div class="form-group">
-                            <label><i class="fas fa-money-bill-wave"></i> Car Price (KES)</label>
-                            <input type="number" id="carPrice" placeholder="e.g., 5000000">
+                            <label><i class="fas fa-money-bill-wave"></i> Vehicle Price (KES)</label>
+                            <input type="number" id="vehiclePrice" placeholder="Enter vehicle price" aria-label="Vehicle price">
                         </div>
                         <div class="form-group">
                             <label><i class="fas fa-hand-holding-usd"></i> Down Payment (KES)</label>
-                            <input type="number" id="downPayment" placeholder="e.g., 1000000">
+                            <input type="number" id="downPayment" placeholder="Enter down payment" aria-label="Down payment">
                         </div>
                         <div class="form-group">
                             <label><i class="fas fa-percent"></i> Interest Rate (%)</label>
-                            <input type="number" id="interestRate" value="14" step="0.5">
+                            <input type="number" id="interestRate" value="14" step="0.5" aria-label="Interest rate">
                         </div>
                         <div class="form-group">
                             <label><i class="fas fa-calendar-alt"></i> Loan Term (Months)</label>
-                            <select id="loanTerm">
+                            <select id="loanTerm" aria-label="Loan term">
                                 <option value="12">12 Months</option>
                                 <option value="24">24 Months</option>
                                 <option value="36" selected>36 Months</option>
@@ -69,39 +95,93 @@
                         <div id="result" class="result-box"></div>
                     </div>
 
+                    <!-- Financing Partners Section -->
                     <div class="partners-section">
-                        <h3>Financing <span class="highlight">Partners</span></h3>
+                        <h3>Our <span class="gold-text">Financing Partners</span></h3>
                         <div class="partners-grid">
                             <div class="partner-card">
                                 <i class="fas fa-university"></i>
                                 <h4>Kenya Commercial Bank</h4>
                                 <p>Competitive auto loan rates from 13%</p>
+                                <span class="partner-badge">Preferred Partner</span>
                             </div>
                             <div class="partner-card">
                                 <i class="fas fa-university"></i>
                                 <h4>Equity Bank</h4>
-                                <p>Flexible financing options</p>
+                                <p>Flexible financing options with quick approval</p>
+                                <span class="partner-badge">Trusted Partner</span>
                             </div>
                             <div class="partner-card">
                                 <i class="fas fa-building"></i>
                                 <h4>NCBA Bank</h4>
-                                <p>Quick approval process</p>
+                                <p>Quick approval process with competitive rates</p>
+                                <span class="partner-badge">Premium Partner</span>
+                            </div>
+                            <div class="partner-card">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Co-operative Bank</h4>
+                                <p>Member-friendly financing solutions</p>
+                                <span class="partner-badge">Partner</span>
                             </div>
                         </div>
+
+                        <!-- Loan Application Form -->
                         <div class="loan-form">
-                            <h3>Apply for <span class="highlight">Financing</span></h3>
+                            <h3>Apply for <span class="gold-text">Financing</span></h3>
+                            <p class="form-subtitle">Fill out the form and our team will contact you within 24 hours</p>
                             <form id="loanApplicationForm">
-                                <div class="form-group">
-                                    <input type="text" placeholder="Full Name" required>
+                                <div class="form-row">
+                                    <input type="text" placeholder="Full Name" required aria-label="Full name">
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" placeholder="Email Address" required>
+                                <div class="form-row">
+                                    <input type="email" placeholder="Email Address" required aria-label="Email address">
                                 </div>
-                                <div class="form-group">
-                                    <input type="tel" placeholder="Phone Number" required>
+                                <div class="form-row">
+                                    <input type="tel" placeholder="Phone Number" required aria-label="Phone number">
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-block">Submit Application</button>
+                                <div class="form-row">
+                                    <select required aria-label="Preferred bank">
+                                        <option value="" disabled selected>Select Preferred Bank</option>
+                                        <option value="kcb">Kenya Commercial Bank</option>
+                                        <option value="equity">Equity Bank</option>
+                                        <option value="ncba">NCBA Bank</option>
+                                        <option value="coop">Co-operative Bank</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <input type="number" placeholder="Expected Loan Amount (KES)" required aria-label="Loan amount">
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    Submit Application <i class="fas fa-arrow-right"></i>
+                                </button>
                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financing Tips Section -->
+                <div class="financing-tips">
+                    <h3>Financing <span class="gold-text">Tips</span></h3>
+                    <div class="tips-grid">
+                        <div class="tip-card">
+                            <i class="fas fa-check-circle"></i>
+                            <h4>Check Your Credit Score</h4>
+                            <p>A good credit score helps secure better interest rates</p>
+                        </div>
+                        <div class="tip-card">
+                            <i class="fas fa-piggy-bank"></i>
+                            <h4>Save for Down Payment</h4>
+                            <p>A larger down payment reduces monthly installments</p>
+                        </div>
+                        <div class="tip-card">
+                            <i class="fas fa-clock"></i>
+                            <h4>Compare Loan Terms</h4>
+                            <p>Choose a term that fits your monthly budget</p>
+                        </div>
+                        <div class="tip-card">
+                            <i class="fas fa-file-invoice"></i>
+                            <h4>Review All Fees</h4>
+                            <p>Understand all associated costs before signing</p>
                         </div>
                     </div>
                 </div>
@@ -109,47 +189,55 @@
         </section>
     </main>
 
-   <footer class="footer">
+    <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>MOMBASA'S TOP CAR DEALS</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Mombasa CBD, Kenya</p>
-                <p><i class="fas fa-phone"></i> 0704 054119</p>
-                <p><i class="fas fa-envelope"></i> info@mombasatopcars.co.ke</p>
-                <p class="copyright">© 2026 Kenya's Premier Automotive Marketplace</p>
+                <div class="logo">
+                    <div class="logo-icon">MN</div>
+                    <div class="logo-text">
+                        <span class="logo-gold">AUTO</span> GROUP
+                    </div>
+                </div>
+                <p>Kenya's premier automotive marketplace, delivering excellence since 2010.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <a href="index.html">Home</a>
-                <a href="listings.html">Car Listings</a>
-                <a href="dealers.html">Dealers</a>
+                <a href="vehicles.html">Vehicles</a>
                 <a href="services.html">Services</a>
                 <a href="financing.html">Financing</a>
+                <a href="testimonials.html">Testimonials</a>
                 <a href="about.html">About Us</a>
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-section">
-                <h4>Legal</h4>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Cookie Policy</a>
-                <a href="#">Dealer Agreement</a>
+                <h4>Our Services</h4>
+                <a href="services.html">Vehicle Sales</a>
+                <a href="services.html">Vehicle Imports</a>
+                <a href="financing.html">Financing Assistance</a>
+                <a href="services.html">Trade-In Services</a>
+                <a href="services.html">Vehicle Sourcing</a>
             </div>
             <div class="footer-section">
-                <h4>Follow Us</h4>
-                <div class="social-icons">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Mombasa CBD, Kenya</p>
+                <p><i class="fas fa-phone"></i> 0704 054119</p>
+                <p><i class="fas fa-phone"></i> 0104054119</p>
+                <p><i class="fas fa-phone"></i> 0704 054119</p>
+                <p><i class="fas fa-envelope"></i> info@mnautogroup.co.ke</p>
+                <p><i class="far fa-clock"></i> Mon-Sat: 8AM - 6PM</p>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 MN AUTO GROUP. All rights reserved. | Designed with <i class="fas fa-heart"></i> for excellence</p>
+        </div>
     </footer>
-
-    <a href="https://wa.me/254704054119" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
     <script src="js/script.js"></script>
 </body>
