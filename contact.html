@@ -1,31 +1,48 @@
-<!-- contact.html -->
+<!-- contact.html - MN AUTO GROUP Contact Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us - Mombasa's Top Car Deals</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Get in touch with MN AUTO GROUP. Contact us for vehicle inquiries, financing, imports, trade-ins, or any assistance. Visit us in Mombasa CBD.">
+    <meta name="keywords" content="contact MN AUTO GROUP, car dealer Mombasa, automotive inquiries, vehicle financing contact">
+    <meta name="author" content="MN AUTO GROUP">
+    <meta property="og:title" content="Contact Us | MN AUTO GROUP | Get in Touch">
+    <meta property="og:description" content="We're here to help you drive your dream car">
+    <title>Contact Us | MN AUTO GROUP | Get in Touch</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
 </head>
 <body>
+
+
+    <a href="https://wa.me/254704054119" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <span class="logo-gold">MOMBASA'S</span> TOP CAR DEALS
+                <div class="logo-icon">MN</div>
+                <div class="logo-text">
+                    <span class="logo-gold">AUTO</span> GROUP
+                </div>
             </div>
             <div class="nav-links" id="navLinks">
                 <a href="index.html">Home</a>
-                <a href="listings.html">Listings</a>
-                <a href="dealers.html">Dealers</a>
+                <a href="vehicles.html">Vehicles</a>
                 <a href="services.html">Services</a>
                 <a href="financing.html">Financing</a>
+                <a href="testimonials.html">Testimonials</a>
                 <a href="about.html">About</a>
                 <a href="contact.html" class="active">Contact</a>
-                <button id="darkModeToggle" class="dark-toggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+                <a href="contact.html" class="nav-cta">Get Quote</a>
             </div>
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
@@ -34,70 +51,97 @@
     </nav>
 
     <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Contact <span class="gold-text">Us</span></h1>
+                <p>We're here to help you drive your dream car</p>
+            </div>
+        </section>
+
         <section class="section contact-page">
             <div class="container">
-                <h2 class="section-title">Get in <span class="highlight">Touch</span></h2>
-                
-                <div class="contact-layout">
-                    <div class="contact-info">
-                        <div class="info-card">
+                <div class="contact-wrapper">
+                    <div class="contact-info-panel">
+                        <h3>Get in Touch</h3>
+                        <div class="contact-detail">
                             <i class="fas fa-map-marker-alt"></i>
-                            <h3>Visit Us</h3>
-                            <p>Mombasa CBD, Kenya</p>
+                            <div>
+                                <strong>Visit Us</strong>
+                                <p>Mombasa CBD, Kenya</p>
+                            </div>
                         </div>
-                        <div class="info-card">
+                        <div class="contact-detail">
                             <i class="fas fa-phone-alt"></i>
-                            <h3>Call Us</h3>
-                            <p>0704 054119</p>
+                            <div>
+                                <strong>Call Us</strong>
+                                <p>0704 054119</p>
+                            </div>
                         </div>
-                        <div class="info-card">
+                        <div class="contact-detail">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>WhatsApp</strong>
+                                <p>0704 054119</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
                             <i class="fas fa-envelope"></i>
-                            <h3>Email Us</h3>
-                            <p>info@mombasatopcars.co.ke</p>
+                            <div>
+                                <strong>Email Us</strong>
+                                <p>info@mnautogroup.co.ke</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="far fa-clock"></i>
+                            <div>
+                                <strong>Business Hours</strong>
+                                <p>Monday - Saturday: 8:00 AM - 6:00 PM</p>
+                                <p>Sunday: Closed</p>
+                            </div>
                         </div>
                         <div class="map-container">
                             <iframe 
                                 src="https://maps.google.com/?q=Mombasa+CBD&output=embed" 
                                 width="100%" 
-                                height="250" 
+                                height="220" 
                                 style="border:0; border-radius: 16px;" 
-                                allowfullscreen="" 
-                                loading="lazy">
+                                allowfullscreen 
+                                loading="lazy"
+                                title="MN AUTO GROUP Location Map">
                             </iframe>
                         </div>
                     </div>
 
-                    <div class="contact-form">
-                        <div class="form-card">
-                            <h3><i class="fas fa-paper-plane"></i> Send Inquiry</h3>
-                            <form id="contactForm">
-                                <div class="form-group">
-                                    <input type="text" placeholder="Your Name" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" placeholder="Email Address" required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="tel" placeholder="Phone Number">
-                                </div>
-                                <div class="form-group">
-                                    <select required>
-                                        <option value="">Inquiry Type</option>
-                                        <option value="buying">Buying a Car</option>
-                                        <option value="selling">Selling a Car</option>
-                                        <option value="dealership">Dealership Partnership</option>
-                                        <option value="service">Automotive Service</option>
-                                        <option value="other">Other</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <textarea rows="5" placeholder="Your Message" required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-block">
-                                    <i class="fas fa-paper-plane"></i> Send Message
-                                </button>
-                            </form>
-                        </div>
+                    <div class="contact-form-panel">
+                        <h3>Send a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <input type="text" placeholder="Your Full Name" required aria-label="Your name">
+                            </div>
+                            <div class="form-row">
+                                <input type="email" placeholder="Email Address" required aria-label="Your email">
+                            </div>
+                            <div class="form-row">
+                                <input type="tel" placeholder="Phone Number" aria-label="Your phone number">
+                            </div>
+                            <div class="form-row">
+                                <select required aria-label="Inquiry type">
+                                    <option value="" disabled selected>Select Inquiry Type</option>
+                                    <option value="purchase">Vehicle Purchase</option>
+                                    <option value="import">Import Services</option>
+                                    <option value="financing">Financing Assistance</option>
+                                    <option value="trade">Trade-In</option>
+                                    <option value="sourcing">Vehicle Sourcing</option>
+                                    <option value="general">General Inquiry</option>
+                                </select>
+                            </div>
+                            <div class="form-row">
+                                <textarea rows="5" placeholder="Your Message" required aria-label="Your message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Send Message <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -107,44 +151,52 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>MOMBASA'S TOP CAR DEALS</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Mombasa CBD, Kenya</p>
-                <p><i class="fas fa-phone"></i> 0704 054119</p>
-                <p><i class="fas fa-envelope"></i> info@mombasatopcars.co.ke</p>
-                <p class="copyright">© 2026 Kenya's Premier Automotive Marketplace</p>
+                <div class="logo">
+                    <div class="logo-icon">MN</div>
+                    <div class="logo-text">
+                        <span class="logo-gold">AUTO</span> GROUP
+                    </div>
+                </div>
+                <p>Kenya's premier automotive marketplace, delivering excellence since 2010.</p>
+                <div class="social-icons">
+                    <a href="#" aria-label="Facebook" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Instagram" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i></a>
+                </div>
             </div>
             <div class="footer-section">
                 <h4>Quick Links</h4>
                 <a href="index.html">Home</a>
-                <a href="listings.html">Car Listings</a>
-                <a href="dealers.html">Dealers</a>
+                <a href="vehicles.html">Vehicles</a>
                 <a href="services.html">Services</a>
                 <a href="financing.html">Financing</a>
+                <a href="testimonials.html">Testimonials</a>
                 <a href="about.html">About Us</a>
                 <a href="contact.html">Contact</a>
             </div>
             <div class="footer-section">
-                <h4>Legal</h4>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Cookie Policy</a>
-                <a href="#">Dealer Agreement</a>
+                <h4>Our Services</h4>
+                <a href="services.html">Vehicle Sales</a>
+                <a href="services.html">Vehicle Imports</a>
+                <a href="financing.html">Financing Assistance</a>
+                <a href="services.html">Trade-In Services</a>
+                <a href="services.html">Vehicle Sourcing</a>
             </div>
             <div class="footer-section">
-                <h4>Follow Us</h4>
-                <div class="social-icons">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Mombasa CBD, Kenya</p>
+                <p><i class="fas fa-phone"></i> 0704 054119</p>
+                <p><i class="fas fa-phone"></i> 0104054119</p>
+                <p><i class="fas fa-phone"></i> 0704 054119</p>
+                <p><i class="fas fa-envelope"></i> info@mnautogroup.co.ke</p>
+                <p><i class="far fa-clock"></i> Mon-Sat: 8AM - 6PM</p>
             </div>
         </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MN AUTO GROUP. All rights reserved. | Designed with <i class="fas fa-heart"></i> for excellence</p>
+        </div>
     </footer>
-
-    <a href="https://wa.me/254704054119" class="whatsapp-float" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
     <script src="js/script.js"></script>
 </body>
